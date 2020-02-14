@@ -34,13 +34,13 @@
         android:layout_height="wrap_content"
         android:text="Game Mode\n#3"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/back_button"
+        app:layout_constraintBottom_toTopOf="@+id/return_from_select_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/game_two_button" />
 
     <Button
-        android:id="@+id/back_button"
+        android:id="@+id/return_from_select_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"

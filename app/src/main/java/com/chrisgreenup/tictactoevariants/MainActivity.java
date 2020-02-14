@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Sets up the UI to show activity_main.xml
     void setupMain(){
         Log.i("TTTMenu", "In activity_main now");
         setContentView(R.layout.activity_main);
@@ -27,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.view_rules_button).setOnClickListener(new MenuButton());
     }
 
+    // Sets up the UI to show activity_select.xml
+    // Sets the correct content view
+    // Hooks up the 3 game mode buttons
+    // Hooks up the button to return to the main menu
     void setupSelect(){
         Log.i("TTTMenu", "In activity_select now");
         setContentView(R.layout.activity_select);
@@ -36,9 +41,28 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.game_two_button).setOnClickListener(new SelectButton());
         findViewById(R.id.game_three_button).setOnClickListener(new SelectButton());
 
-        findViewById(R.id.back_button).setOnClickListener(new SelectButton());
+        findViewById(R.id.return_from_select_button).setOnClickListener(new SelectButton());
     }
 
+    // Sets up the UI to show activity_info.xml
+    // Sets the correct content view
+    // Hooks up the single button
+    void setupInfo(){
+        Log.i("TTTMenu", "In activity_info now");
+        setContentView(R.layout.activity_info);
+        inMainActivity = false;
+
+        // This is the only button in this activity, and all it needs to do is
+        // return to the main menu, so onBackPressed is used for simplicity's sake
+        findViewById(R.id.return_from_info_button).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+
+    //Handles all of the onClick actions for the buttons in activity_main.xml
     class MenuButton implements OnClickListener{
         @Override
         public void onClick(View view) {
@@ -46,11 +70,12 @@ public class MainActivity extends AppCompatActivity {
                 setupSelect();
             }
             else{
-                //Put stuff here for Info button
+                setupInfo();
             }
         }
     }
 
+    //Handles all of the onClick actions for the buttons in activity_select.xml
     class SelectButton implements OnClickListener{
         @Override
         public void onClick(View view) {
