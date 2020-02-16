@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <ImageButton
-        android:id="@+id/space_2_2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/space_2_1"
-        app:layout_constraintTop_toTopOf="@+id/space_2_1"
-        app:srcCompat="@drawable/empty" />
-
     <ImageView
         android:id="@+id/game_board_tv"
         android:layout_width="0dp"
@@ -84,16 +74,6 @@
         app:srcCompat="@drawable/empty" />
 
     <ImageButton
-        android:id="@+id/space_2_1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/space_2_2"
-        app:layout_constraintStart_toEndOf="@+id/space_2_0"
-        app:layout_constraintTop_toTopOf="@+id/space_2_0"
-        app:srcCompat="@drawable/empty" />
-
-    <ImageButton
         android:id="@+id/space_1_2"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -113,5 +93,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/space_1_0"
         app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_2_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/space_2_2"
+        app:layout_constraintStart_toEndOf="@+id/space_2_0"
+        app:layout_constraintTop_toTopOf="@+id/space_2_0"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_2_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space_2_1"
+        app:layout_constraintTop_toTopOf="@+id/space_2_1"
+        app:srcCompat="@drawable/empty" />
+
+    <Button
+        android:id="@+id/reset_board_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset\nBoard"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/game_board_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
