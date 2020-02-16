@@ -6,17 +6,113 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Player 2: 0"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+    <ImageButton
+        android:id="@+id/space_0_0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/space_1_0"
+        app:layout_constraintEnd_toStartOf="@+id/space_0_1"
+        app:layout_constraintStart_toStartOf="@+id/game_board_tv"
+        app:layout_constraintTop_toTopOf="@+id/game_board_tv"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_0_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/space_0_0"
+        app:layout_constraintEnd_toStartOf="@+id/space_0_2"
+        app:layout_constraintStart_toEndOf="@+id/space_0_0"
+        app:layout_constraintTop_toTopOf="@+id/space_0_0"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_0_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/space_0_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/space_0_1"
+        app:layout_constraintTop_toTopOf="@+id/space_0_1"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_1_0"
+        android:layout_width="0dp"
+        android:scaleType="fitCenter"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/space_2_0"
+        app:layout_constraintEnd_toStartOf="@+id/space_0_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space_0_0"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_1_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/space_1_0"
+        app:layout_constraintEnd_toStartOf="@+id/space_1_2"
+        app:layout_constraintStart_toEndOf="@+id/space_1_0"
+        app:layout_constraintTop_toTopOf="@+id/space_1_0"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_1_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/space_1_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space_1_1"
+        app:layout_constraintTop_toTopOf="@+id/space_1_1"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_2_0"
+        android:scaleType="fitCenter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/game_board_tv"
+        app:layout_constraintEnd_toStartOf="@+id/space_2_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space_1_0"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_2_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/space_2_0"
+        app:layout_constraintEnd_toStartOf="@+id/space_2_2"
+        app:layout_constraintStart_toEndOf="@+id/space_2_0"
+        app:layout_constraintTop_toTopOf="@+id/space_2_0"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_2_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/space_2_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space_2_1"
+        app:layout_constraintTop_toTopOf="@+id/space_2_1"
+        app:srcCompat="@drawable/empty" />
 
     <ImageView
         android:id="@+id/game_board_tv"
@@ -33,99 +129,6 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/game_board" />
 
-    <ImageButton
-        android:id="@+id/space_0_0"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/space_1_0"
-        app:layout_constraintEnd_toStartOf="@+id/space_0_1"
-        app:layout_constraintStart_toStartOf="@+id/game_board_tv"
-        app:layout_constraintTop_toTopOf="@+id/game_board_tv"
-        app:srcCompat="@drawable/empty" />
-
-    <ImageButton
-        android:id="@+id/space_0_1"
-        android:background="#00FFFFFF"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toStartOf="@+id/space_0_2"
-        app:layout_constraintStart_toEndOf="@+id/space_0_0"
-        app:layout_constraintTop_toTopOf="@+id/space_0_0"
-        app:srcCompat="@drawable/empty" />
-
-    <ImageButton
-        android:id="@+id/space_0_2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/space_0_1"
-        app:layout_constraintTop_toTopOf="@+id/space_0_1"
-        app:srcCompat="@drawable/empty" />
-
-    <ImageButton
-        android:id="@+id/space_1_0"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/space_2_0"
-        app:layout_constraintEnd_toStartOf="@+id/space_0_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space_0_0"
-        app:srcCompat="@drawable/empty" />
-
-    <ImageButton
-        android:id="@+id/space_1_1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/space_1_2"
-        app:layout_constraintStart_toEndOf="@+id/space_1_0"
-        app:layout_constraintTop_toTopOf="@+id/space_1_0"
-        app:srcCompat="@drawable/empty" />
-
-    <ImageButton
-        android:id="@+id/space_1_2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/space_1_1"
-        app:layout_constraintTop_toTopOf="@+id/space_1_1"
-        app:srcCompat="@drawable/empty" />
-
-    <ImageButton
-        android:id="@+id/space_2_0"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/game_board_tv"
-        app:layout_constraintEnd_toStartOf="@+id/space_2_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space_1_0"
-        app:srcCompat="@drawable/empty" />
-
-    <ImageButton
-        android:id="@+id/space_2_1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/space_2_2"
-        app:layout_constraintStart_toEndOf="@+id/space_2_0"
-        app:layout_constraintTop_toTopOf="@+id/space_2_0"
-        app:srcCompat="@drawable/empty" />
-
-    <ImageButton
-        android:id="@+id/space_2_2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/space_2_1"
-        app:layout_constraintTop_toTopOf="@+id/space_2_1"
-        app:srcCompat="@drawable/empty" />
-
     <Button
         android:id="@+id/reset_board_button"
         android:layout_width="wrap_content"
@@ -135,24 +138,46 @@
         android:padding="13sp"
         android:text="Reset\nBoard"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintBottom_toBottomOf="@+id/player_two_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/player_one_tv"
+        app:layout_constraintTop_toTopOf="@+id/player_one_tv" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/player_one_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="67dp"
         android:text="Player 1: 0"
         android:textColor="@color/textColorPrimary"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/player_two_tv"
         app:layout_constraintEnd_toStartOf="@+id/reset_board_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/game_board_tv" />
+
+    <TextView
+        android:id="@+id/player_two_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Player 2: 0"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/player_one_tv"
+        app:layout_constraintTop_toBottomOf="@+id/player_one_tv" />
+
+    <TextView
+        android:id="@+id/player_turn_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player x's turn!"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/player_one_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space_2_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

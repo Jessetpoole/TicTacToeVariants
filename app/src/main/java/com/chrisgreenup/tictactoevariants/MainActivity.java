@@ -15,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean inMainActivity;
 
-    private ArrayList<Character> [][] board;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
