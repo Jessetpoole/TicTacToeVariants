@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:text="Player1:0"
+            android:text="Player1: 0 "
             android:layout_alignParentLeft="true"
             />
 
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:text="Player2:0"
+            android:text="Player2: 0"
             android:layout_toRightOf="@+id/player1_textView"
             />
 
