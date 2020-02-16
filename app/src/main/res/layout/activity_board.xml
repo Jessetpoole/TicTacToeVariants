@@ -136,7 +136,7 @@
         android:layout_marginEnd="16dp"
         android:background="@color/buttonBackground"
         android:padding="13sp"
-        android:text="Reset\nBoard"
+        android:text="Reset\nGame"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/player_two_tv"
         app:layout_constraintEnd_toEndOf="parent"
