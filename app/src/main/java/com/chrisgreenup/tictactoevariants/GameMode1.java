@@ -1,6 +1,7 @@
 package com.chrisgreenup.tictactoevariants;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,7 +11,9 @@ import android.widget.Toast;
 
 public class GameMode1 {
 
+
     public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
         //Array for each of the squares
         private Button[][] buttons = new Button[3][3];
         private boolean player1Turn = true;
@@ -24,8 +27,9 @@ public class GameMode1 {
         private TextView player2textView;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
+
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_gamemode1);
             player1textView = findViewById(R.id.p1_textview);
             player2textView = findViewById(R.id.p2_textview);
             // For Loop that will reference the button array, 3 indicates the number of Rounds

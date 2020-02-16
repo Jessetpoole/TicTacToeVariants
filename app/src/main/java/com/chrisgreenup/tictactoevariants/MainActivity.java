@@ -3,6 +3,7 @@ package com.chrisgreenup.tictactoevariants;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -70,9 +71,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setupBoard(){
-        setContentView(R.layout.activity_board);
+        Intent intent = new Intent(getApplicationContext(), GameModes.class);
+        startActivity(intent);
+        //setContentView(R.layout.activity_board); !REMOVE LATER
 
-        initializeTheBoardButtons();
         //TODO: implement method of writing board state to a file
         //TODO: implement a method of reading file and applying to board state
 
@@ -80,26 +82,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO: implement board clearing
     }
 
-    //  Hooks up all of the buttons on activity_board.xml
-    //  This is its own method to improve readability when setting up the board because this
-    //  is just a mess, and makes the other method hard to read
-    void initializeTheBoardButtons(){
-        findViewById(R.id.space_0_0).setOnClickListener(new BoardButton());
-        findViewById(R.id.space_0_1).setOnClickListener(new BoardButton());
-        findViewById(R.id.space_0_2).setOnClickListener(new BoardButton());
-        findViewById(R.id.space_1_0).setOnClickListener(new BoardButton());
-        findViewById(R.id.space_1_1).setOnClickListener(new BoardButton());
-        findViewById(R.id.space_1_2).setOnClickListener(new BoardButton());
-        findViewById(R.id.space_2_0).setOnClickListener(new BoardButton());
-        findViewById(R.id.space_2_1).setOnClickListener(new BoardButton());
-        findViewById(R.id.space_2_2).setOnClickListener(new BoardButton());
-        findViewById(R.id.reset_board_button).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Put the board clearing thing here
-            }
-        });
-    }
+
 
     //Handles all of the onClick actions for the buttons in activity_main.xml
     class MenuButton implements OnClickListener{
@@ -140,12 +123,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class BoardButton implements  OnClickListener{
-        @Override
-        public void onClick(View view) {
-            //TODO: do the game stuff here
-        }
-    }
+
 
     @Override
     public void onBackPressed() {
