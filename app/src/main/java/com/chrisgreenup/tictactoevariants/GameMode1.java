@@ -1,180 +1,288 @@
 package com.chrisgreenup.tictactoevariants;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
 import android.widget.Toast;
 
-public class GameMode1 {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
+public class GameMode1 extends AppCompatActivity {
 
-    public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    //ArrayList representation of the board
+    private String[][] board;
 
-        //Array for each of the squares
-        private Button[][] buttons = new Button[3][3];
-        private boolean player1Turn = true;
-        // Counts the number of rounds up to 9
-        private int roundCount;
-        //Points for each player
-        private int player1Points;
-        private int player2Points;
-        //Displays the points for each player
-        private TextView player1textView;
-        private TextView player2textView;
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
+    private boolean player1sTurn = true;
 
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_gamemode1);
-            player1textView = findViewById(R.id.p1_textview);
-            player2textView = findViewById(R.id.p2_textview);
-            // For Loop that will reference the button array, 3 indicates the number of Rounds
-            // With the nested loop we can loop through the 2D array rows and columns with the button ids
-            for (int i = 0; i < 3; i++) {
-                for (int t = 0; t < 3; t++) {
-                    String buttonID = "button_" + i + t;
-                    //This is a substitute for R.id since I created the nested loop,
-                    int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
-                    //This line I can get references to my buttons without having to doing it one by one
-                    buttons[i][t] = findViewById(resID);
-                    buttons[i][t].setOnClickListener(this);
-                }
+    // Counts the number of rounds up to 9
+    private int roundCount;
+
+    //Points for each player
+    private int player1NumWins;
+    private int player2NumWins;
+
+    //Displays the points for each player
+    private TextView player1textView;
+    private TextView player2textView;
+    private TextView playerTurnTextView;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_board);
+
+        board = new String[3][3];
+        initializeTheBoardButtons();
+
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                board[i][j] = "";
             }
-            // This sets up the Reset Button through the anonymous inner class
-            Button resetButton = findViewById(R.id.reset_button);
-            resetButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    resetGame();
-                }
-            });
         }
+
+        player1textView = findViewById(R.id.player_one_tv);
+        player2textView = findViewById(R.id.player_two_tv);
+        playerTurnTextView = findViewById(R.id.player_turn_tv);
+        playerTurnTextView.setText("Player 1s Turn.");
+    }
+
+    //  Hooks up all of the buttons on activity_board.xml
+    //  This is its own method to improve readability when setting up the board because this
+    //  is just a mess, and makes the other method hard to read
+    void initializeTheBoardButtons(){
+        ImageButton btn_0_0 = (ImageButton) findViewById(R.id.space_0_0);
+        btn_0_0.setOnClickListener(new BoardButton(0, 0));
+        btn_0_0.setImageResource(R.drawable.empty);
+        ImageButton btn_0_1 = (ImageButton) findViewById(R.id.space_0_1);
+        btn_0_1.setOnClickListener(new BoardButton(0, 1));
+        btn_0_1.setImageResource(R.drawable.empty);
+        ImageButton btn_0_2 = (ImageButton) findViewById(R.id.space_0_2);
+        btn_0_2.setOnClickListener(new BoardButton(0, 2));
+        btn_0_2.setImageResource(R.drawable.empty);
+        ImageButton btn_1_0 = (ImageButton) findViewById(R.id.space_1_0);
+        btn_1_0.setOnClickListener(new BoardButton(1, 0));
+        btn_1_0.setImageResource(R.drawable.empty);
+        ImageButton btn_1_1 = (ImageButton) findViewById(R.id.space_1_1);
+        btn_1_1.setOnClickListener(new BoardButton(1, 1));
+        btn_1_1.setImageResource(R.drawable.empty);
+        ImageButton btn_1_2 = (ImageButton) findViewById(R.id.space_1_2);
+        btn_1_2.setOnClickListener(new BoardButton(1, 2));
+        btn_1_2.setImageResource(R.drawable.empty);
+        ImageButton btn_2_0 = (ImageButton) findViewById(R.id.space_2_0);
+        btn_2_0.setOnClickListener(new BoardButton(2, 0));
+        btn_2_0.setImageResource(R.drawable.empty);
+        ImageButton btn_2_1 = (ImageButton) findViewById(R.id.space_2_1);
+        btn_2_1.setOnClickListener(new BoardButton(2, 1));
+        btn_2_1.setImageResource(R.drawable.empty);
+        ImageButton btn_2_2 = (ImageButton) findViewById(R.id.space_2_2);
+        btn_2_2.setOnClickListener(new BoardButton(2, 2));
+        btn_2_2.setImageResource(R.drawable.empty);
+
+        //This button isn't on the game board, but is put here to reduce clutter
+        //Resets the entire game when pressed by called the function resetGame()
+        findViewById(R.id.reset_board_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetGame();
+            }
+        });
+    }
+
+    class BoardButton implements View.OnClickListener {
+        private int x;
+        private int y;
+        private String gameMark = "EMPTY";
+
+
+        public BoardButton(int y, int x){
+            this.x = x;
+            this.y = y;
+
+        }
+
         @Override
-        public void onClick(View v) {
-            // on click for playing field buttons; I am casting v into a button
-            // This will check to see if the button clicked has a empty string, if not a gamepiece was used
-            if (!((Button) v).getText().toString().equals("")) {
+        public void onClick(View view) {
+            ImageButton btn = findViewById(view.getId());
+
+            if(!gameMark.equals("EMPTY")){
                 return;
             }
-            // This checks if player 1 turn is true and adds texts to the buttons
-            if (player1Turn) {
-                ((Button) v).setText("X");
-            } else {
-                ((Button) v).setText("O");
+
+            //If it is player 1's turn, set the marking to be X
+            if(player1sTurn){
+                gameMark = "x";
+                board[y][x] = "x";
+                btn.setImageResource(R.drawable.cross);
+            } else{
+                //Otherwise, it must be player 2's turn, set the marking to be O
+                gameMark = "o";
+                board[y][x] = "o";
+                btn.setImageResource(R.drawable.circle);
             }
-            // Increments the round
+
             roundCount++;
-            // Winner announced after it is verified by checkForWinner Method (p1,p2,draw)
-            if (checkForWinner()) {
-                if (player1Turn) {
-                    player1Wins();
-                } else {
-                    player2Wins();
+
+            //If somebody just won,
+            if(thereIsAWinner()){
+                //and it was player 1's turn, player 1 must have won
+                if(player1sTurn){
+                    player1NumWins++;
+                    Toast.makeText(getApplicationContext(), "Player 1 Wins!!", Toast.LENGTH_LONG).show();
+                } else {//Otherwise, Player 2 must have won
+                    player2NumWins++;
+                    Toast.makeText(getApplicationContext(),"Player 2 Wins!!", Toast.LENGTH_LONG).show();
                 }
-            } else if (roundCount == 9) {
-                draw();
-            } else {
-                // Switch turns
-                player1Turn = !player1Turn;
+
+                resetBoard();
+                updateTextViews();
+            }
+            //Otherwise, make sure the game hasn't stalemated
+            else if(roundCount == 9){
+                Toast.makeText(getApplicationContext(), "It's a draw.", Toast.LENGTH_LONG).show();
+                resetBoard();
+            }
+            //Otherwise, the game isn't over. Switch turns to the next player
+            else{
+                player1sTurn = !player1sTurn;
+                if(player1sTurn)
+                    playerTurnTextView.setText("Player 1s Turn.");
+                else
+                    playerTurnTextView.setText("Player 2s Turn.");
             }
         }
-        // Checks for winner
-        private boolean checkForWinner() {
-            // This will save the text of the buttons in the array
-            String[][] board = new String[3][3];
-            for (int i = 0; i < 3; i ++) {
-                for (int t = 0; t < 3; t++) {
-                    board[i][t] = buttons[i][t].getText().toString();
+    }
+
+    //Updates the textViews
+    void updateTextViews(){
+        player1textView.setText("Player 1: " + player1NumWins);
+        player2textView.setText("Player 2: " + player2NumWins);
+    }
+
+    void resetBoard(){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                board[i][j] = "";
+            }
+        }
+        initializeTheBoardButtons();
+        roundCount = 0;
+        player1sTurn = true;
+        playerTurnTextView.setText("Player 1s Turn.");
+        updateTextViews();
+
+    }
+    void resetGame(){
+        player1NumWins = 0;
+        player2NumWins = 0;
+        resetBoard();
+    }
+
+    boolean thereIsAWinner(){
+        return (checkColumns() || checkRows() || checkDiagonals());
+    }
+
+    boolean checkRows(){
+        String lastMark;
+        String currentMark;
+        int numInARow;
+
+        //First check the columns
+        for(int y = 0; y < 3; y++) {
+            numInARow = 1;
+            lastMark = board[y][0];
+
+            for (int x = 1; x < 3; x++) {
+                currentMark = board[y][x];
+
+                if (lastMark.equals(currentMark) && !currentMark.equals("")) {
+                    numInARow++;
+
+                    if (numInARow == 3) {
+                        return true;
+                    }
                 }
             }
-            // These arrays will go through rows an columns and compare the boards next to each other
-            // to see if anything has been played, if it is true someone has won the game, if it is
-            // false, then we do not have a winner
-            // This will check the rows
-            for (int i = 0; i <3; i++) {
-                if (board[i][0].equals(board[i][1])
-                        && board[i][0].equals(board[i][2])
-                        && !board[i][0].equals("")) {
+        }
+
+        return false;
+    }
+
+    boolean checkColumns(){
+        String lastMark;
+        String currentMark;
+        int numInARow;
+
+        //First check the columns
+        for(int x = 0; x < 3; x++) {
+            numInARow = 1;
+            lastMark = board[0][x];
+
+            for (int y = 1; y < 3; y++) {
+                currentMark = board[y][x];
+
+                if (lastMark.equals(currentMark) && !currentMark.equals("")) {
+                    numInARow++;
+
+                    if (numInARow == 3) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    boolean checkDiagonals(){
+        String lastMark;
+        String currentMark;
+        int numInARow;
+
+
+        numInARow = 1;
+        lastMark = board[0][0];
+        for (int i = 1; i < 3; i++){
+            currentMark = board[i][i];
+            if (currentMark.equals(lastMark) && !currentMark.equals("")){
+                numInARow++;
+                if(numInARow == 3)
                     return true;
-                }
             }
-            // This will check the columns
-            for (int i = 0; i <3; i++) {
-                if (board[0][i].equals(board[1][i])
-                        && board[0][i].equals(board[2][i])
-                        && !board[0][i].equals("")) {
+        }
+
+        numInARow = 1;
+        lastMark = board[2][0];
+        for (int i = 1; i < 3; i++){
+            currentMark = board[2-i][i];
+            if (currentMark.equals(lastMark) && !currentMark.equals("")){
+                numInARow++;
+                if(numInARow == 3)
                     return true;
-                }
             }
-            // This will check diagonal
-            if (board[0][0].equals(board[1][1])
-                    && board[0][0].equals(board[2][2])
-                    && !board[0][0].equals("")) {
-                return true;
-            }
-            // This will also check diagonal
-            if (board[0][2].equals(board[1][1])
-                    && board[0][2].equals(board[2][0])
-                    && !board[0][2].equals("")) {
-                return true;
-            }
-            return false;
         }
-        private void player1Wins(){
-            player1Points++;
-            Toast.makeText(this, "Player 1 Wins!", Toast.LENGTH_SHORT).show();
-            updatePoints();
-            resetBoard();
-        }
-        private void player2Wins(){
-            player2Points++;
-            Toast.makeText(this, "Player 2 Wins!", Toast.LENGTH_SHORT).show();
-            updatePoints();
-            resetBoard();
-        }
-        private void draw(){
-            Toast.makeText(this, "DRAW!", Toast.LENGTH_SHORT).show();
-            resetBoard();
-        }
-        public void updatePoints() {
-            player1textView.setText("Player 1: " + player1Points);
-            player2textView.setText("Player 2: " + player2Points);
-        }
-        private void resetBoard() {
-            for (int i = 0; i < 3; i++) {
-                for (int t = 0; t < 3; t++) {
-                    buttons[i][t].setText("");
-                }
-            }
-            roundCount = 0;
-            player1Turn = true;
-        }
-        private void resetGame() {
-            player1Points = 0;
-            player2Points = 0;
-            updatePoints();
-            resetBoard();
-        }
-        // This is used save the game information
-        @Override
-        protected void onSaveInstanceState(Bundle outState) {
-            super.onSaveInstanceState(outState);
-            outState.putInt("roundCount", roundCount);
-            outState.putInt("player1Points", player1Points);
-            outState.putInt("player2Points", player2Points);
-            outState.putBoolean("player1Turn", player1Turn);
-        }
-        @Override
-        protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-            super.onRestoreInstanceState(savedInstanceState);
-            roundCount = savedInstanceState.getInt("roundCount");
-            player1Points = savedInstanceState.getInt("player1Points");
-            player2Points = savedInstanceState.getInt("player2Points");
-            player1Turn = savedInstanceState.getBoolean("player1Turn");
-        }
+
+        return false;
+    }
+
+    // This is used save the game information
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("roundCount", roundCount);
+        outState.putInt("player1Points", player1NumWins);
+        outState.putInt("player2Points", player2NumWins);
+        outState.putBoolean("player1Turn", player1sTurn);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        roundCount = savedInstanceState.getInt("roundCount");
+        player1NumWins = savedInstanceState.getInt("player1Points");
+        player2NumWins = savedInstanceState.getInt("player2Points");
+        player1sTurn = savedInstanceState.getBoolean("player1Turn");
     }
 }

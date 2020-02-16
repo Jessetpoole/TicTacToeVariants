@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     private boolean inMainActivity;
@@ -69,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setupBoard(){
-        Intent intent = new Intent(getApplicationContext(), GameModes.class);
+        Intent intent = new Intent(getApplicationContext(), GameMode1.class);
         startActivity(intent);
         //setContentView(R.layout.activity_board); !REMOVE LATER
 
