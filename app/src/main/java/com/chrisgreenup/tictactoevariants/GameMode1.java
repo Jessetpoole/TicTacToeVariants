@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import android.widget.Toast;
 
 public class GameMode1 {
-    
+
     public class MainActivity extends AppCompatActivity implements View.OnClickListener {
         //Array for each of the squares
         private Button[][] buttons = new Button[3][3];
