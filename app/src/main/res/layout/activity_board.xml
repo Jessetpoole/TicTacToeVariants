@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ImageButton
+        android:id="@+id/space_2_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space_2_1"
+        app:layout_constraintTop_toTopOf="@+id/space_2_1"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageView
+        android:id="@+id/game_board_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="250dp"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/game_board" />
+
+    <ImageButton
+        android:id="@+id/space_0_0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/space_1_0"
+        app:layout_constraintEnd_toStartOf="@+id/space_0_1"
+        app:layout_constraintStart_toStartOf="@+id/game_board_tv"
+        app:layout_constraintTop_toTopOf="@+id/game_board_tv"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_0_1"
+        android:background="#00FFFFFF"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toStartOf="@+id/space_0_2"
+        app:layout_constraintStart_toEndOf="@+id/space_0_0"
+        app:layout_constraintTop_toTopOf="@+id/space_0_0"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_0_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space_0_1"
+        app:layout_constraintTop_toTopOf="@+id/space_0_1"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_1_0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/space_2_0"
+        app:layout_constraintEnd_toStartOf="@+id/space_0_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space_0_0"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_1_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/space_1_2"
+        app:layout_constraintStart_toEndOf="@+id/space_1_0"
+        app:layout_constraintTop_toTopOf="@+id/space_1_0"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_2_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/space_2_2"
+        app:layout_constraintStart_toEndOf="@+id/space_2_0"
+        app:layout_constraintTop_toTopOf="@+id/space_2_0"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_1_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space_1_1"
+        app:layout_constraintTop_toTopOf="@+id/space_1_1"
+        app:srcCompat="@drawable/empty" />
+
+    <ImageButton
+        android:id="@+id/space_2_0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/game_board_tv"
+        app:layout_constraintEnd_toStartOf="@+id/space_2_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/space_1_0"
+        app:srcCompat="@drawable/empty" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
