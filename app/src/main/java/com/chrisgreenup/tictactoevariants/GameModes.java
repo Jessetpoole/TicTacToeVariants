@@ -186,7 +186,7 @@ public class GameModes extends AppCompatActivity {
     }
 
     boolean thereIsAWinner(){
-        return (checkColumns() || checkRows());
+        return (checkColumns() || checkRows() || checkDiagonals());
     }
 
     boolean checkRows(){
@@ -208,8 +208,6 @@ public class GameModes extends AppCompatActivity {
                     if (numInARow == 3) {
                         return true;
                     }
-                } else {
-                    x += 2;
                 }
             }
         }
@@ -236,10 +234,40 @@ public class GameModes extends AppCompatActivity {
                     if (numInARow == 3) {
                         return true;
                     }
-                } else {
-                    y += 2;
                 }
             }
+        }
+
+        return false;
+    }
+
+    boolean checkDiagonals(){
+        String lastMark;
+        String currentMark;
+        int numInARow;
+
+
+        numInARow = 1;
+        lastMark = board[0][0];
+        for (int i = 1; i < 3; i++){
+            currentMark = board[i][i];
+            if (currentMark.equals(lastMark) && !currentMark.equals("")){
+                numInARow++;
+                if(numInARow == 3)
+                    return true;
+            }
+        }
+
+        numInARow = 1;
+        lastMark = board[2][0];
+        for (int i = 1; i < 3; i++){
+            currentMark = board[2-i][i];
+            if (currentMark.equals(lastMark) && !currentMark.equals("")){
+                numInARow++;
+                if(numInARow == 3)
+                    return true;
+            }
+
         }
 
         return false;
