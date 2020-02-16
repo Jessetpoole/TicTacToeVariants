@@ -7,51 +7,55 @@
     android:background="#73BB73">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/info_game_one_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:padding="10dp"
         android:text="GAME MODE ONE is a game where both players play with the same game piece, represented with an X, and ~~~~"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/info_game_two_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="GAME MODE ONE is a game where both players play with the same game piece, represented with an X, and ~~~~"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        android:text="GAME MODE Two is a game where both players play with the same game piece, represented with an X, and ~~~~"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/info_game_three_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/info_game_one_tv" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/info_game_three_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="GAME MODE ONE is a game where both players play with the same game piece, represented with an X, and ~~~~"
-        android:textSize="30dp"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/return_from_info_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/info_game_two_tv" />
 
     <Button
         android:id="@+id/return_from_info_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:background="@color/buttonBackground"
         android:padding="10dp"
         android:text="Return"
+        android:textColor="@color/textColorPrimary"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
