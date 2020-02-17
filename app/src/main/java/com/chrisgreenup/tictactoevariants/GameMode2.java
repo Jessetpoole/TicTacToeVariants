@@ -131,10 +131,15 @@ public class GameMode2 extends AppCompatActivity{
 
     int checkBoard(){
         int total;
-        total = checkRows();
+        total = checkRows() + checkColumns() + checkDiagonals();
+
+
+        Log.i("TTT", "total = " + total);
+
+        Log.i("TTT", "totalMatch = " + totalMatches);
 
         total -= totalMatches;
-        totalMatches = total;
+        totalMatches += total;
         return total;
     }
 
@@ -142,12 +147,11 @@ public class GameMode2 extends AppCompatActivity{
         int total = 0;
 
         for(int y = 0; y < 3; y++){
-            if(board[y][0].equals("s") && board[y][1].equals("o") && board[y][2].equals("s")){
+            if((board[y][0].equals("s")) && (board[y][1].equals("o")) && (board[y][2].equals("s"))){
                 total++;
             }
         }
 
-        Log.i("TTT", "total = " + total);
         return total;
     }
 
@@ -162,6 +166,20 @@ public class GameMode2 extends AppCompatActivity{
         return total;
     }
 
+    int checkDiagonals(){
+        int total = 0;
+
+        if(board[0][0].equals("s") && board[1][1].equals("o") && board[2][2].equals("s")){
+            total++;
+        }
+
+        if(board[2][0].equals("s") && board[1][1].equals("o") && board[0][2].equals("s")){
+            total++;
+        }
+
+        return total;
+    }
+
     void resetBoard(){
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
@@ -171,6 +189,9 @@ public class GameMode2 extends AppCompatActivity{
         initializeTheBoardButtons();
         roundCount = 0;
         player1sTurn = true;
+        mark = "s";
+        ((ImageButton) findViewById(R.id.mark_ib)).setImageResource(R.drawable.s);
+
         playerTurnTextView.setText("Player 1s Turn.");
         updateTextViews();
 
@@ -202,8 +223,6 @@ public class GameMode2 extends AppCompatActivity{
         @Override
         public void onClick(View view) {
             ImageButton btn = findViewById(view.getId());
-
-            Log.i("TTT", "" + x + ", " + y);
             if(!board[y][x].equals("")){
                 return;
             }
