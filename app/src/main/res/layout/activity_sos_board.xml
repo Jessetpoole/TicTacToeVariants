@@ -210,13 +210,13 @@
         android:layout_height="wrap_content"
         android:text="Tap icon to select mark"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton"
-        app:layout_constraintStart_toStartOf="@+id/imageButton"
+        app:layout_constraintBottom_toTopOf="@+id/mark_ib"
+        app:layout_constraintEnd_toEndOf="@+id/mark_ib"
+        app:layout_constraintStart_toStartOf="@+id/mark_ib"
         app:layout_constraintTop_toBottomOf="@+id/player_one_tv" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/mark_ib"
         android:layout_width="127dp"
         android:layout_height="99dp"
         android:background="#63FFFFFF"
@@ -225,6 +225,6 @@
         app:layout_constraintEnd_toStartOf="@+id/reset_game_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/cross" />
+        app:srcCompat="@drawable/s" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
