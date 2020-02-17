@@ -98,10 +98,12 @@ public class GameMode1 extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.reset_game_button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.reset_game_button).setOnLongClickListener(new View.OnLongClickListener() {
+
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 resetGame();
+                return false;
             }
         });
     }
@@ -156,7 +158,17 @@ public class GameMode1 extends AppCompatActivity {
             }
             //Otherwise, make sure the game hasn't stalemated
             else if(roundCount == 9){
-                Toast.makeText(getApplicationContext(), "It's a draw.", Toast.LENGTH_LONG).show();
+                if(thereIsAMatch()){
+                    if(player1sTurn)
+                        player1Wins();
+                    else
+                        player2Wins();
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "It's a draw.", Toast.LENGTH_LONG).show();
+
+                endGame();
+                updateTextViews();
             }
             //Otherwise, the game isn't over. Switch turns to the next player
             else{
@@ -181,8 +193,8 @@ public class GameMode1 extends AppCompatActivity {
 
     //Updates the textViews
     void updateTextViews(){
-        player1textView.setText("Player 1: " + player1NumWins);
-        player2textView.setText("Player 2: " + player2NumWins);
+        player1textView.setText("Player 1 wins: " + player1NumWins);
+        player2textView.setText("Player 2 wins: " + player2NumWins);
     }
 
     void resetBoard(){
