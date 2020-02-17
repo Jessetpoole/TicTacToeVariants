@@ -364,6 +364,4 @@ public class GameMode1 extends AppCompatActivity {
         player2NumWins = savedInstanceState.getInt("player2Points");
         player1sTurn = savedInstanceState.getBoolean("player1Turn");
     }
-
-
 }
