@@ -6,12 +6,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GameMode2 extends AppCompatActivity implements View.OnClickListener {
 
     //Array for each of the squares used for the board
     private Button[][] buttons = new Button[3][3];
+
     private boolean player1Turn = true;
 
     // Counts the number of rounds up to 9
@@ -20,15 +22,16 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
     //Points for each player
     private int player1Points = 0;
     private int player2Points = 0;
-    
+
     // Displays the points for each player
     private TextView textViewPlayer1;
     private TextView textViewPlayer2;
+
     private Button reset_button;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamemode2);
 
@@ -71,17 +74,17 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
             return;
         }
 
-        // checks if player 1 turn is true and adds the text to the buttons
+        // Checks if player 1 turn is true and adds the text to the buttons
         if (player1Turn) {
             b.setText("N");
 
         } else {
             b.setText("O");
         }
-        // Increments the round
+        // Increments the number of rounds
         roundCounts++;
 
-        // Winner announced after it is verified by the checkForWinner Method (p1,p2,draw)
+        // Determinations after it is verified by the checkForWin Method (p1,p2,draw)
         if (checkForWin()) {
             if (player1Turn) {
                 player1Wins();
