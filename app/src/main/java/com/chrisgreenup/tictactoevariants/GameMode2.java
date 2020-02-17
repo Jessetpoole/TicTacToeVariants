@@ -5,16 +5,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GameMode2 extends AppCompatActivity implements View.OnClickListener {
 
+    //Array for each of the squares used for the board
     private Button[][] buttons = new Button[3][3];
     private boolean player1Turn = true;
+
+    // Counts the number of rounds up to 9
     private int roundCounts = 0;
+
+    //Points for each player
     private int player1Points = 0;
     private int player2Points = 0;
+    
+    // Displays the points for each player
     private TextView textViewPlayer1;
     private TextView textViewPlayer2;
     private Button reset_button;
@@ -47,6 +54,7 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
         buttons[2][1] = (Button) findViewById(R.id.button_21);
         buttons[2][2] = (Button) findViewById(R.id.button_22);
 
+        //References to the buttons
         for (int i = 0; i < 3; i++)
             for (int t = 0; t < 3; t++)
                 buttons[i][t].setOnClickListener(this);
@@ -63,15 +71,17 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
             return;
         }
 
-
+        // checks if player 1 turn is true and adds the text to the buttons
         if (player1Turn) {
             b.setText("N");
 
         } else {
             b.setText("O");
         }
+        // Increments the round
         roundCounts++;
 
+        // Winner announced after it is verified by the checkForWinner Method (p1,p2,draw)
         if (checkForWin()) {
             if (player1Turn) {
                 player1Wins();
@@ -81,6 +91,7 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
         } else if (roundCounts == 9) {
             draw();
         } else {
+        // Switch Turns
             player1Turn = !player1Turn;
         }
 
@@ -113,12 +124,11 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
 
     }
 
-
+       // This nested for loop will allow the game to reset to the state that it was first opened
     private void resetBoard() {
         for (int i = 0; i < 3; i++)
             for (int t = 0; t < 3; t++)
                 buttons[i][t].setText("");
-
 
         roundCounts = 0;
         player1Turn = true;
@@ -134,9 +144,9 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
         resetBoard();
     }
 
-
+    // This is the method where it will check for a winner
     private boolean checkForWin() {
-
+    //This will save the text of the buttons in the array
         String[][] board = new String[3][3];
 
         for (int i = 0; i < 3; i++)
@@ -152,23 +162,23 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
             }
 
         }
+    // These arrays will go through rows and columns and compare the boards next to each other to
+    // to see if anything has been played, if it is true someone has won the game, if it is false
+    // then we do not yet have a winner.
 
-
+    // This will check the rows (horizontal)
         for (int i = 0; i < 3; i++) {
             if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i])
                     && !board[0][i].equals("")) {
-
                 return true;
             }
-
         }
-
-
+    // This will check the columns (vertical)
         if (board[0][0].equals(board[1][1]) && board[0][0].equals(board[2][2])
                 && !board[0][0].equals("")) {
             return true;
         }
-
+    // This will check the diagonals
         if (board[0][2].equals(board[1][1]) && board[0][2].equals(board[2][0])
                 && !board[0][2].equals("")) {
             return true;
@@ -176,7 +186,27 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
 
             return false;
 
+
+
     }
 
+    // This is used to save the game information
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("roundCounts", roundCounts);
+        outState.putInt("player1Points", player1Points);
+        outState.putInt("player2", player2Points);
+        outState.putBoolean("player1Turn", player1Turn);
+    }
 
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        roundCounts = savedInstanceState.getInt("roundCounts");
+        player1Points = savedInstanceState.getInt("player1Points");
+        player2Points = savedInstanceState.getInt("player2Points");
+        player1Turn = savedInstanceState.getBoolean("player1Turn");
+
+    }
 }
