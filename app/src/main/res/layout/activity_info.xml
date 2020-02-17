@@ -44,8 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text=" - Revenge 3-in-a-row is a simple variation of Tic-Tac-Toe
-where the goal is to get 3 in a row. However, if your opponent gets 3 in a row on
+                android:text=" - Revenge 3-in-a-row. \nRevenge 3-in-a-row is a simple variation
+of Tic-Tac-Toe where the goal is to get 3 in a row. However, if your opponent gets 3 in a row on
 that next turn, the opponent wins."
                 android:textColor="@color/textColorPrimary"
                 android:textSize="30sp" />
@@ -55,9 +55,9 @@ that next turn, the opponent wins."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="The numbers 1 to 9 are used in this game. The first player plays
-with the odd numbers, the second player plays with the even numbers. All numbers
-can be used only once. The player who puts down 15 points in a line wins
+                android:text=" - Numerical Tic-Tac-Toe. \nThe numbers 1 to 9 are used in this game.
+The first player plays with the odd numbers, the second player plays with the even numbers.
+All numbers can be used only once. The player who puts down 15 points in a line wins
 (sum of 3 numbers)"
                 android:textColor="@color/textColorPrimary"
                 android:textSize="30sp" />
@@ -67,6 +67,8 @@ can be used only once. The player who puts down 15 points in a line wins
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:text=" - Random Tic-Tac-Toe. \nRandom Tic-Tac-Toe is played like regular
+tic-tac-toe, except that player turns are determined at random. Be sure to pay attention! May luck be on your side."
                 android:textColor="@color/textColorPrimary"
                 android:textSize="30sp" />
         </LinearLayout>
