@@ -17,11 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".GameMode1"
-            android:label="Revenge 3-in-a-row">
-
-        </activity>
+            android:label="Revenge 3-in-a-row"></activity>
         <activity android:name=".GameMode2"
             android:label="Numerical Tic-Tac-Toe"></activity>
+        <activity android:name=".GameMode3"
+            android:label="Random Tic-Tac-Toe"></activity>
     </application>
 
 </manifest>
