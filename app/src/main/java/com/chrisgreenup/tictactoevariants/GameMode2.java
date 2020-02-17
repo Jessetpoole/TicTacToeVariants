@@ -56,6 +56,6 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
             return;
         }
 
-        
+
     }
 }
