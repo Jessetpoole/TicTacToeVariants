@@ -7,26 +7,19 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GameMode1 extends AppCompatActivity {
+import java.util.Random;
 
-    //ArrayList representation of the board
+public class GameMode3 extends AppCompatActivity {
+    //Array representation of the board
     private String[][] board;
 
     private boolean player1sTurn = true;
 
     // Counts the number of rounds up to 9
     private int roundCount;
-
-    //Counts the number of 3-in-a-rows
-    //This is used to determine if an opponent gets a match 3 after the other player
-    private int matchCount;
-
-    //Variable to keep track if there was a match on the last turn
-    private boolean matchLastTurn;
 
     //Points for each player
     private int player1NumWins;
@@ -45,8 +38,8 @@ public class GameMode1 extends AppCompatActivity {
         board = new String[3][3];
         initializeTheBoardButtons();
 
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 board[i][j] = "";
             }
         }
@@ -60,7 +53,7 @@ public class GameMode1 extends AppCompatActivity {
     //  Hooks up all of the buttons on activity_board.xml
     //  This is its own method to improve readability when setting up the board because this
     //  is just a mess, and makes the other method hard to read
-    void initializeTheBoardButtons(){
+    void initializeTheBoardButtons() {
         ImageButton btn_0_0 = (ImageButton) findViewById(R.id.space_0_0);
         btn_0_0.setOnClickListener(new BoardButton(0, 0));
         btn_0_0.setImageResource(R.drawable.empty);
@@ -111,7 +104,7 @@ public class GameMode1 extends AppCompatActivity {
         private int y;
 
 
-        public BoardButton(int y, int x){
+        public BoardButton(int y, int x) {
             this.x = x;
             this.y = y;
 
@@ -126,10 +119,10 @@ public class GameMode1 extends AppCompatActivity {
             }
 
             //If it is player 1's turn, set the marking to be X
-            if(player1sTurn){
+            if (player1sTurn) {
                 board[y][x] = "x";
                 btn.setImageResource(R.drawable.cross);
-            } else{
+            } else {
                 //Otherwise, it must be player 2's turn, set the marking to be O
                 board[y][x] = "o";
                 btn.setImageResource(R.drawable.circle);
@@ -137,31 +130,31 @@ public class GameMode1 extends AppCompatActivity {
 
             roundCount++;
 
-            //If somebody just made 3-in-a-row,
-            if(thereIsAWinner()){
-                if(matchCount == 2){
-                    if(player1sTurn)
-                        player1Wins();
-                    else
-                        player2Wins();
-                } else{
-                    if(player1sTurn)
-                        player2Wins();
-                    else
-                        player1Wins();
+            //If somebody just won,
+            if (thereIsAWinner()) {
+                //and it was player 1's turn, player 1 must have won
+                if (player1sTurn) {
+                    player1NumWins++;
+                    Toast.makeText(getApplicationContext(), "Player 1 Wins!!", Toast.LENGTH_LONG).show();
+                } else {//Otherwise, Player 2 must have won
+                    player2NumWins++;
+                    Toast.makeText(getApplicationContext(), "Player 2 Wins!!", Toast.LENGTH_LONG).show();
                 }
-                //resetBoard();
+
                 endGame();
                 updateTextViews();
             }
             //Otherwise, make sure the game hasn't stalemated
-            else if(roundCount == 9){
+            else if (roundCount == 9) {
                 Toast.makeText(getApplicationContext(), "It's a draw.", Toast.LENGTH_LONG).show();
+                resetBoard();
             }
-            //Otherwise, the game isn't over. Switch turns to the next player
-            else{
-                player1sTurn = !player1sTurn;
-                if(player1sTurn)
+            //Otherwise, the game isn't over. FLip a coin to see who's turn it is next;
+            else {
+                Random random = new Random();
+                player1sTurn = random.nextBoolean();
+
+                if (player1sTurn)
                     playerTurnTextView.setText("Player 1s Turn.");
                 else
                     playerTurnTextView.setText("Player 2s Turn.");
@@ -169,81 +162,43 @@ public class GameMode1 extends AppCompatActivity {
         }
     }
 
-    void player1Wins(){
-        player1NumWins++;
-        Toast.makeText(getApplicationContext(), "Player 1 Wins!!", Toast.LENGTH_LONG).show();
-    }
-
-    void player2Wins(){
-        player2NumWins++;
-        Toast.makeText(getApplicationContext(), "Player 2 Wins!!", Toast.LENGTH_LONG).show();
-    }
-
     //Updates the textViews
-    void updateTextViews(){
+    void updateTextViews() {
         player1textView.setText("Player 1: " + player1NumWins);
         player2textView.setText("Player 2: " + player2NumWins);
     }
 
-    void resetBoard(){
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
+    void resetBoard() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 board[i][j] = "";
             }
         }
         initializeTheBoardButtons();
         roundCount = 0;
-        matchCount = 0;
         player1sTurn = true;
-        matchLastTurn = false;
         playerTurnTextView.setText("Player 1s Turn.");
         updateTextViews();
 
     }
-    void resetGame(){
+
+    void resetGame() {
         player1NumWins = 0;
         player2NumWins = 0;
         resetBoard();
     }
 
-    void endGame(){
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                board[i][j] = "-END-";
-            }
-        }
-    }
-
-    boolean thereIsAWinner(){
-        if(thereIsAMatch()) {
-            Log.i("TTT", "match count: " + matchCount);
-            Log.i("TTT", "MLT = " + matchLastTurn);
-
-
-            if (matchLastTurn == true){
-                return true;
-            }
-
-
-            matchLastTurn = true;
-        }
-
-        return false;
-    }
-
-    boolean thereIsAMatch(){
-        matchCount = 0;
+    boolean thereIsAWinner() {
         return (checkColumns() || checkRows() || checkDiagonals());
     }
 
-    boolean checkRows(){
+    boolean checkRows() {
         String lastMark;
         String currentMark;
         int numInARow;
-        boolean isThereAMatch = false;
 
         //First check the columns
-        for(int y = 0; y < 3; y++) {
+        for (int y = 0; y < 3; y++) {
             numInARow = 1;
             lastMark = board[y][0];
 
@@ -254,25 +209,22 @@ public class GameMode1 extends AppCompatActivity {
                     numInARow++;
 
                     if (numInARow == 3) {
-                        matchCount++;
-                        isThereAMatch = true;
-                        Log.i("TTT", "MATCH ROW");
+                        return true;
                     }
                 }
             }
         }
 
-        return isThereAMatch;
+        return false;
     }
 
-    boolean checkColumns(){
+    boolean checkColumns() {
         String lastMark;
         String currentMark;
         int numInARow;
-        boolean isThereAMatch = false;
 
         //First check the columns
-        for(int x = 0; x < 3; x++) {
+        for (int x = 0; x < 3; x++) {
             numInARow = 1;
             lastMark = board[0][x];
 
@@ -283,75 +235,52 @@ public class GameMode1 extends AppCompatActivity {
                     numInARow++;
 
                     if (numInARow == 3) {
-                        matchCount++;
-                        isThereAMatch = true;
-                        Log.i("TTT", "MATCH COL");
+                        return true;
                     }
                 }
             }
         }
 
-        return isThereAMatch;
+        return false;
     }
 
-    boolean checkDiagonals(){
+    boolean checkDiagonals() {
         String lastMark;
         String currentMark;
         int numInARow;
-        boolean isThereAMatch = false;
 
 
         numInARow = 1;
         lastMark = board[0][0];
-        for (int i = 1; i < 3; i++){
+        for (int i = 1; i < 3; i++) {
             currentMark = board[i][i];
-            if (currentMark.equals(lastMark) && !currentMark.equals("")){
+            if (currentMark.equals(lastMark) && !currentMark.equals("")) {
                 numInARow++;
-                if(numInARow == 3) {
-                    matchCount++;
-                    isThereAMatch = true;
-                    Log.i("TTT", "MATCH Diag 1");
-                }
+                if (numInARow == 3)
+                    return true;
             }
         }
 
         numInARow = 1;
         lastMark = board[2][0];
-        for (int i = 1; i < 3; i++){
-            currentMark = board[2-i][i];
-            if (currentMark.equals(lastMark) && !currentMark.equals("")){
+        for (int i = 1; i < 3; i++) {
+            currentMark = board[2 - i][i];
+            if (currentMark.equals(lastMark) && !currentMark.equals("")) {
                 numInARow++;
-                if(numInARow == 3) {
-                    matchCount++;
-                    isThereAMatch = true;
-                    Log.i("TTT", "MATCH Diag2");
-                }
+                if (numInARow == 3)
+                    return true;
             }
+
         }
 
-        return isThereAMatch;
+        return false;
     }
 
-
-
-    // This is used save the game information
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("roundCount", roundCount);
-        outState.putInt("player1Points", player1NumWins);
-        outState.putInt("player2Points", player2NumWins);
-        outState.putBoolean("player1Turn", player1sTurn);
+    void endGame(){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                board[i][j] = "-END-";
+            }
+        }
     }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        roundCount = savedInstanceState.getInt("roundCount");
-        player1NumWins = savedInstanceState.getInt("player1Points");
-        player2NumWins = savedInstanceState.getInt("player2Points");
-        player1sTurn = savedInstanceState.getBoolean("player1Turn");
-    }
-
-
 }

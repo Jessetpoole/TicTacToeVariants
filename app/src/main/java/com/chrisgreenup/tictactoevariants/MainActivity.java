@@ -66,19 +66,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    void setupBoard(){
-        Intent intent = new Intent(getApplicationContext(), GameMode1.class);
-        startActivity(intent);
-        //setContentView(R.layout.activity_board); !REMOVE LATER
-
-        //TODO: implement method of writing board state to a file
-        //TODO: implement a method of reading file and applying to board state
-
-        //TODO: implement saving the board (writing) when leaving board in any form
-    }
-
-
-
     //Handles all of the onClick actions for the buttons in activity_main.xml
     class MenuButton implements OnClickListener{
         @Override
@@ -96,21 +83,25 @@ public class MainActivity extends AppCompatActivity {
     class SelectButton implements OnClickListener{
         @Override
         public void onClick(View view) {
+            Intent intent;
+
             if(view.getId() == R.id.game_one_button){
                 //Game one button code here
                 Log.i("TTTButton", "Button = 1");
-                setupBoard();
+                intent = new Intent(getApplicationContext(), GameMode1.class);
+                startActivity(intent);
             }
             else if(view.getId() == R.id.game_two_button){
                 //Game two button code here
                 Log.i("TTTButton", "Button = 2");
-                Intent intent = new Intent(getApplicationContext(), GameMode2.class);
+                intent = new Intent(getApplicationContext(), GameMode2.class);
                 startActivity(intent);
             }
             else if (view.getId() == R.id.game_three_button){
                 //Game Three button code here
                 Log.i("TTTButton", "Button = 3");
-                setupBoard();
+                intent = new Intent(getApplicationContext(), GameMode3.class);
+                startActivity(intent);
             }
             else{
                 //Otherwise, the return button has been pressed
