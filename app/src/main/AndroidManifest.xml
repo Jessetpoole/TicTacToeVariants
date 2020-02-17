@@ -20,6 +20,8 @@
             android:label="Revenge 3-in-a-row"></activity>
         <activity android:name=".GameMode2"
             android:label="Numerical Tic-Tac-Toe"></activity>
+        <activity android:name=".GameMode4"
+            android:label="SOS"></activity>
         <activity android:name=".GameMode3"
             android:label="Random Tic-Tac-Toe"></activity>
     </application>

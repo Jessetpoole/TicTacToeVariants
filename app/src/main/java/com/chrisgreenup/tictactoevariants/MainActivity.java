@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.game_one_button).setOnClickListener(new SelectButton());
         findViewById(R.id.game_two_button).setOnClickListener(new SelectButton());
         findViewById(R.id.game_three_button).setOnClickListener(new SelectButton());
+        findViewById(R.id.game_four_button).setOnClickListener(new SelectButton());
 
         findViewById(R.id.return_from_select_button).setOnClickListener(new SelectButton());
     }
@@ -86,21 +87,18 @@ public class MainActivity extends AppCompatActivity {
             Intent intent;
 
             if(view.getId() == R.id.game_one_button){
-                //Game one button code here
-                Log.i("TTTButton", "Button = 1");
                 intent = new Intent(getApplicationContext(), GameMode1.class);
                 startActivity(intent);
             }
             else if(view.getId() == R.id.game_two_button){
-                //Game two button code here
-                Log.i("TTTButton", "Button = 2");
                 intent = new Intent(getApplicationContext(), GameMode2.class);
                 startActivity(intent);
             }
             else if (view.getId() == R.id.game_three_button){
-                //Game Three button code here
-                Log.i("TTTButton", "Button = 3");
                 intent = new Intent(getApplicationContext(), GameMode3.class);
+                startActivity(intent);
+            }else if(view.getId() == R.id.game_four_button){
+                intent = new Intent(getApplicationContext(), GameMode4.class);
                 startActivity(intent);
             }
             else{
