@@ -13,6 +13,8 @@ public class GameMode2 extends AppCompatActivity{
 
     private String[][] board;
 
+    private int totalMatches;
+
     private boolean player1sTurn = true;
 
     // What mark does the player want to place
@@ -22,8 +24,8 @@ public class GameMode2 extends AppCompatActivity{
     private int roundCount;
 
     //Points for each player
-    private int player1NumWins;
-    private int player2NumWins;
+    private int player1Score;
+    private int player2Score;
 
     //Displays the points for each player
     private TextView player1textView;
@@ -38,11 +40,18 @@ public class GameMode2 extends AppCompatActivity{
         initializeTheBoardButtons();
         board = new String[3][3];
 
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
                 board[i][j] = "";
-            }
-        }
+
+
+        roundCount = 0;
+        totalMatches = 0;
+
+        player1textView = findViewById(R.id.player_one_tv);
+        player2textView = findViewById(R.id.player_two_tv);
+        playerTurnTextView = findViewById(R.id.player_turn_tv);
+        playerTurnTextView.setText("Player 1s Turn.");
     }
 
     //  Hooks up all of the buttons on activity_board.xml
@@ -83,7 +92,7 @@ public class GameMode2 extends AppCompatActivity{
         findViewById(R.id.reset_board_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //resetBoard();
+                resetBoard();
             }
         });
 
@@ -91,7 +100,7 @@ public class GameMode2 extends AppCompatActivity{
 
             @Override
             public boolean onLongClick(View view) {
-                //resetGame();
+                resetGame();
                 return false;
             }
         });
@@ -108,8 +117,76 @@ public class GameMode2 extends AppCompatActivity{
                     mark = "s";
                     btn.setImageResource(R.drawable.s);
                 }
+
+                roundCount++;
             }
         });
+    }
+
+    //Updates the textViews
+    void updateTextViews(){
+        player1textView.setText("Player 1 Score: " + player1Score);
+        player2textView.setText("Player 2 Score: " + player2Score);
+    }
+
+    int checkBoard(){
+        int total;
+        total = checkRows();
+
+        total -= totalMatches;
+        totalMatches = total;
+        return total;
+    }
+
+    int checkRows(){
+        int total = 0;
+
+        for(int y = 0; y < 3; y++){
+            if(board[y][0].equals("s") && board[y][1].equals("o") && board[y][2].equals("s")){
+                total++;
+            }
+        }
+
+        Log.i("TTT", "total = " + total);
+        return total;
+    }
+
+    int checkColumns(){
+        int total = 0;
+
+        for(int x = 0; x < 3; x++){
+            if(board[0][x].equals("s") && board[1][x].equals("o") && board[2][x].equals("s")){
+                total++;
+            }
+        }
+        return total;
+    }
+
+    void resetBoard(){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                board[i][j] = "";
+            }
+        }
+        initializeTheBoardButtons();
+        roundCount = 0;
+        player1sTurn = true;
+        playerTurnTextView.setText("Player 1s Turn.");
+        updateTextViews();
+
+    }
+
+    void resetGame(){
+        player1Score = player2Score = 0;
+        resetBoard();
+    }
+
+    void endGame(){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                board[i][j] = "-END-";
+            }
+        }
     }
 
     class BoardButton implements View.OnClickListener {
@@ -138,6 +215,21 @@ public class GameMode2 extends AppCompatActivity{
                 btn.setImageResource(R.drawable.o);
                 board[y][x] = "o";
             }
+
+            int check = checkBoard();
+            if(check > 0){
+                if(player1sTurn){
+                    player1Score += check;
+                }
+                else player2Score += check;
+
+                updateTextViews();
+            }
+
+            if(roundCount >= 9){
+                endGame();
+            }
+
         }
     }
 
