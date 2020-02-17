@@ -1,12 +1,13 @@
 package com.chrisgreenup.tictactoevariants;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GameMode2 extends AppCompatActivity {
+public class GameMode2 extends AppCompatActivity implements View.OnClickListener {
 
     private Button[][] buttons = new Button[3][3];
     private boolean player1Turn = true;
@@ -38,11 +39,23 @@ public class GameMode2 extends AppCompatActivity {
       buttons[2][1]=(Button)findViewById(R.id.button_21);
       buttons[2][2]=(Button)findViewById(R.id.button_22);
 
-
-
+      for(int i =0; i<3; i++)
+          for (int t=0; t<3; t++)
+              buttons[i][t].setOnClickListener(this);
 
 
 
     }
 
+    @Override
+    public void onClick(View v) {
+
+        Button b =(Button)v;
+
+        if(b.getText().toString().equals("")) {
+            return;
+        }
+
+        
+    }
 }
