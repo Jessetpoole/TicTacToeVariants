@@ -6,44 +6,6 @@
     android:layout_height="match_parent"
     android:background="#73BB73">
 
-    <TextView
-        android:id="@+id/info_game_one_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="GAME MODE ONE is a game where both players play with the same game piece, represented with an X, and ~~~~"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/info_game_two_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="GAME MODE Two is a game where both players play with the same game piece, represented with an X, and ~~~~"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/info_game_three_tv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_game_one_tv" />
-
-    <TextView
-        android:id="@+id/info_game_three_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="GAME MODE THREE is a game where both players play with the same game piece, represented with an X, and ~~~~"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/return_from_info_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_game_two_tv" />
-
     <Button
         android:id="@+id/return_from_info_button"
         android:layout_width="wrap_content"
@@ -53,8 +15,61 @@
         android:padding="10dp"
         android:text="Return"
         android:textColor="@color/textColorPrimary"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorAccent"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/return_from_info_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/info_game_one_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text=" - Revenge 3-in-a-row is a simple variation of Tic-Tac-Toe
+where the goal is to get 3 in a row. However, if your opponent gets 3 in a row on
+that next turn, the opponent wins."
+                android:textColor="@color/textColorPrimary"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/info_game_two_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="The numbers 1 to 9 are used in this game. The first player plays
+with the odd numbers, the second player plays with the even numbers. All numbers
+can be used only once. The player who puts down 15 points in a line wins
+(sum of 3 numbers)"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/info_game_three_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="30sp" />
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
