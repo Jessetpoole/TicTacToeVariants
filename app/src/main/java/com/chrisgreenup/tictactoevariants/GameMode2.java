@@ -50,12 +50,20 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
 
-        Button b =(Button)v;
+        Button b = (Button) v;
 
-        if(b.getText().toString().equals("")) {
+        if (b.getText().toString().equals("")) {
             return;
         }
 
+
+        if (player1Turn) {
+            b.setText("X");
+
+        } else {
+            b.setText("O");
+        }
+        roundCounts++;
 
     }
 }
