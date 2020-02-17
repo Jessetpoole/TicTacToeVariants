@@ -1,6 +1,7 @@
 package com.chrisgreenup.tictactoevariants;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -19,6 +20,13 @@ public class GameMode1 extends AppCompatActivity {
 
     // Counts the number of rounds up to 9
     private int roundCount;
+
+    //Counts the number of 3-in-a-rows
+    //This is used to determine if an opponent gets a match 3 after the other player
+    private int matchCount;
+
+    //Variable to keep track if there was a match on the last turn
+    private boolean matchLastTurn;
 
     //Points for each player
     private int player1NumWins;
@@ -86,6 +94,13 @@ public class GameMode1 extends AppCompatActivity {
         findViewById(R.id.reset_board_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                resetBoard();
+            }
+        });
+
+        findViewById(R.id.reset_game_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 resetGame();
             }
         });
@@ -94,7 +109,6 @@ public class GameMode1 extends AppCompatActivity {
     class BoardButton implements View.OnClickListener {
         private int x;
         private int y;
-        private String gameMark = "EMPTY";
 
 
         public BoardButton(int y, int x){
@@ -107,42 +121,42 @@ public class GameMode1 extends AppCompatActivity {
         public void onClick(View view) {
             ImageButton btn = findViewById(view.getId());
 
-            if(!gameMark.equals("EMPTY")){
+            if(!board[y][x].equals("")){
                 return;
             }
 
             //If it is player 1's turn, set the marking to be X
             if(player1sTurn){
-                gameMark = "x";
                 board[y][x] = "x";
                 btn.setImageResource(R.drawable.cross);
             } else{
                 //Otherwise, it must be player 2's turn, set the marking to be O
-                gameMark = "o";
                 board[y][x] = "o";
                 btn.setImageResource(R.drawable.circle);
             }
 
             roundCount++;
 
-            //If somebody just won,
+            //If somebody just made 3-in-a-row,
             if(thereIsAWinner()){
-                //and it was player 1's turn, player 1 must have won
-                if(player1sTurn){
-                    player1NumWins++;
-                    Toast.makeText(getApplicationContext(), "Player 1 Wins!!", Toast.LENGTH_LONG).show();
-                } else {//Otherwise, Player 2 must have won
-                    player2NumWins++;
-                    Toast.makeText(getApplicationContext(),"Player 2 Wins!!", Toast.LENGTH_LONG).show();
+                if(matchCount == 2){
+                    if(player1sTurn)
+                        player1Wins();
+                    else
+                        player2Wins();
+                } else{
+                    if(player1sTurn)
+                        player2Wins();
+                    else
+                        player1Wins();
                 }
-
-                resetBoard();
+                //resetBoard();
+                endGame();
                 updateTextViews();
             }
             //Otherwise, make sure the game hasn't stalemated
             else if(roundCount == 9){
                 Toast.makeText(getApplicationContext(), "It's a draw.", Toast.LENGTH_LONG).show();
-                resetBoard();
             }
             //Otherwise, the game isn't over. Switch turns to the next player
             else{
@@ -153,6 +167,16 @@ public class GameMode1 extends AppCompatActivity {
                     playerTurnTextView.setText("Player 2s Turn.");
             }
         }
+    }
+
+    void player1Wins(){
+        player1NumWins++;
+        Toast.makeText(getApplicationContext(), "Player 1 Wins!!", Toast.LENGTH_LONG).show();
+    }
+
+    void player2Wins(){
+        player2NumWins++;
+        Toast.makeText(getApplicationContext(), "Player 2 Wins!!", Toast.LENGTH_LONG).show();
     }
 
     //Updates the textViews
@@ -169,7 +193,9 @@ public class GameMode1 extends AppCompatActivity {
         }
         initializeTheBoardButtons();
         roundCount = 0;
+        matchCount = 0;
         player1sTurn = true;
+        matchLastTurn = false;
         playerTurnTextView.setText("Player 1s Turn.");
         updateTextViews();
 
@@ -180,7 +206,33 @@ public class GameMode1 extends AppCompatActivity {
         resetBoard();
     }
 
+    void endGame(){
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                board[i][j] = "-END-";
+            }
+        }
+    }
+
     boolean thereIsAWinner(){
+        if(thereIsAMatch()) {
+            Log.i("TTT", "match count: " + matchCount);
+            Log.i("TTT", "MLT = " + matchLastTurn);
+
+
+            if (matchLastTurn == true){
+                return true;
+            }
+
+
+            matchLastTurn = true;
+        }
+
+        return false;
+    }
+
+    boolean thereIsAMatch(){
+        matchCount = 0;
         return (checkColumns() || checkRows() || checkDiagonals());
     }
 
@@ -188,6 +240,7 @@ public class GameMode1 extends AppCompatActivity {
         String lastMark;
         String currentMark;
         int numInARow;
+        boolean isThereAMatch = false;
 
         //First check the columns
         for(int y = 0; y < 3; y++) {
@@ -201,19 +254,22 @@ public class GameMode1 extends AppCompatActivity {
                     numInARow++;
 
                     if (numInARow == 3) {
-                        return true;
+                        matchCount++;
+                        isThereAMatch = true;
+                        Log.i("TTT", "MATCH ROW");
                     }
                 }
             }
         }
 
-        return false;
+        return isThereAMatch;
     }
 
     boolean checkColumns(){
         String lastMark;
         String currentMark;
         int numInARow;
+        boolean isThereAMatch = false;
 
         //First check the columns
         for(int x = 0; x < 3; x++) {
@@ -227,19 +283,22 @@ public class GameMode1 extends AppCompatActivity {
                     numInARow++;
 
                     if (numInARow == 3) {
-                        return true;
+                        matchCount++;
+                        isThereAMatch = true;
+                        Log.i("TTT", "MATCH COL");
                     }
                 }
             }
         }
 
-        return false;
+        return isThereAMatch;
     }
 
     boolean checkDiagonals(){
         String lastMark;
         String currentMark;
         int numInARow;
+        boolean isThereAMatch = false;
 
 
         numInARow = 1;
@@ -248,8 +307,11 @@ public class GameMode1 extends AppCompatActivity {
             currentMark = board[i][i];
             if (currentMark.equals(lastMark) && !currentMark.equals("")){
                 numInARow++;
-                if(numInARow == 3)
-                    return true;
+                if(numInARow == 3) {
+                    matchCount++;
+                    isThereAMatch = true;
+                    Log.i("TTT", "MATCH Diag 1");
+                }
             }
         }
 
@@ -259,13 +321,18 @@ public class GameMode1 extends AppCompatActivity {
             currentMark = board[2-i][i];
             if (currentMark.equals(lastMark) && !currentMark.equals("")){
                 numInARow++;
-                if(numInARow == 3)
-                    return true;
+                if(numInARow == 3) {
+                    matchCount++;
+                    isThereAMatch = true;
+                    Log.i("TTT", "MATCH Diag2");
+                }
             }
         }
 
-        return false;
+        return isThereAMatch;
     }
+
+
 
     // This is used save the game information
     @Override
@@ -285,4 +352,6 @@ public class GameMode1 extends AppCompatActivity {
         player2NumWins = savedInstanceState.getInt("player2Points");
         player1sTurn = savedInstanceState.getBoolean("player1Turn");
     }
+
+
 }

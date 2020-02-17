@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
     void setupBoard(){
         Intent intent = new Intent(getApplicationContext(), GameMode1.class);
         startActivity(intent);
-        //setContentView(R.layout.activity_board); !REMOVE LATER
 
         //TODO: implement method of writing board state to a file
         //TODO: implement a method of reading file and applying to board state
