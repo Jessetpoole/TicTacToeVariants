@@ -101,7 +101,7 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
         } else if (roundCounts == 9) {
             draw();
         } else {
-        // Switch Turns
+            // Switch Turns
             player1Turn = !player1Turn;
         }
 
@@ -134,7 +134,7 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
 
     }
 
-       // This nested for loop will allow the game to reset to the state that it was first opened
+    // This nested for loop will allow the game to reset to the state that it was first opened
     private void resetBoard() {
         for (int i = 0; i < 3; i++)
             for (int t = 0; t < 3; t++)
@@ -156,7 +156,7 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
 
     // This is the method where it will check for a winner
     private boolean checkForWin() {
-    //This will save the text of the buttons in the array
+        //This will save the text of the buttons in the array
         String[][] board = new String[3][3];
 
         for (int i = 0; i < 3; i++)
@@ -172,29 +172,29 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
             }
 
         }
-    // These arrays will go through rows and columns and compare the boards next to each other to
-    // to see if anything has been played, if it is true someone has won the game, if it is false
-    // then we do not yet have a winner.
+        // These arrays will go through rows and columns and compare the boards next to each other to
+        // to see if anything has been played, if it is true someone has won the game, if it is false
+        // then we do not yet have a winner.
 
-    // This will check the rows (horizontal)
+        // This will check the rows (horizontal)
         for (int i = 0; i < 3; i++) {
             if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i])
                     && !board[0][i].equals("")) {
                 return true;
             }
         }
-    // This will check the columns (vertical)
+        // This will check the columns (vertical)
         if (board[0][0].equals(board[1][1]) && board[0][0].equals(board[2][2])
                 && !board[0][0].equals("")) {
             return true;
         }
-    // This will check the diagonals
+        // This will check the diagonals
         if (board[0][2].equals(board[1][1]) && board[0][2].equals(board[2][0])
                 && !board[0][2].equals("")) {
             return true;
         }
 
-            return false;
+        return false;
 
 
 
