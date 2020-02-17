@@ -65,7 +65,7 @@ public class GameMode2 extends AppCompatActivity implements View.OnClickListener
 
 
         if (player1Turn) {
-            b.setText("X");
+            b.setText("N");
 
         } else {
             b.setText("O");
