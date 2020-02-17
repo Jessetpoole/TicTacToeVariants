@@ -20,6 +20,8 @@
             android:label="Game Mode">
 
         </activity>
+        <activity android:name=".GameMode2"
+            android:label="Game Mode 2"></activity>
     </application>
 
 </manifest>

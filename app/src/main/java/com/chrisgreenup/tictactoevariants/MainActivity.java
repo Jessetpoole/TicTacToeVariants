@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         //TODO: implement a method of reading file and applying to board state
 
         //TODO: implement saving the board (writing) when leaving board in any form
-        //TODO: implement board clearing
     }
 
 
@@ -105,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
             else if(view.getId() == R.id.game_two_button){
                 //Game two button code here
                 Log.i("TTTButton", "Button = 2");
-                setupBoard();
+                Intent intent = new Intent(getApplicationContext(), GameMode2.class);
+                startActivity(intent);
             }
             else if (view.getId() == R.id.game_three_button){
                 //Game Three button code here
