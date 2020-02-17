@@ -29,6 +29,7 @@
         android:layout_marginBottom="16dp"
         android:background="@color/colorAccent"
         android:padding="10dp"
+        android:scrollbarSize="8dp"
         app:layout_constraintBottom_toTopOf="@+id/return_from_info_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,6 +72,18 @@ All numbers can be used only once. The player who puts down 15 points in a line 
 tic-tac-toe, except that player turns are determined at random. Be sure to pay attention! May luck be on your side."
                 android:textColor="@color/textColorPrimary"
                 android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/info_game_four_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text=" - S.O.S. \nThis is a game that is played  with two markers, S and O.
+Each player takes turns playing either an S or an O, trying to spell out SOS on the board.
+The game does not end when a player makes an SOS, rather each player is trying to get the most
+number of SOSs they can before the end of the game"
+                android:textSize="30sp"
+                android:textColor="@color/textColorPrimary"/>
         </LinearLayout>
     </ScrollView>
 
