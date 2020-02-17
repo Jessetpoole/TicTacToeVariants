@@ -117,8 +117,6 @@ public class GameMode2 extends AppCompatActivity{
                     mark = "s";
                     btn.setImageResource(R.drawable.s);
                 }
-
-                roundCount++;
             }
         });
     }
@@ -127,16 +125,23 @@ public class GameMode2 extends AppCompatActivity{
     void updateTextViews(){
         player1textView.setText("Player 1 Score: " + player1Score);
         player2textView.setText("Player 2 Score: " + player2Score);
+        if(player1sTurn)
+            playerTurnTextView.setText("Player 1s Turn.");
+        else
+            playerTurnTextView.setText("Player 2s Turn.");
+        if(roundCount >= 9){
+            if(player1Score > player2Score)
+                playerTurnTextView.setText("Player 1 wins!");
+            else if (player2Score > player1Score)
+                playerTurnTextView.setText("Player 2 wins!");
+            else
+                playerTurnTextView.setText("It's a draw");
+        }
     }
 
     int checkBoard(){
         int total;
         total = checkRows() + checkColumns() + checkDiagonals();
-
-
-        Log.i("TTT", "total = " + total);
-
-        Log.i("TTT", "totalMatch = " + totalMatches);
 
         total -= totalMatches;
         totalMatches += total;
@@ -242,12 +247,16 @@ public class GameMode2 extends AppCompatActivity{
                 }
                 else player2Score += check;
 
-                updateTextViews();
             }
+
+            roundCount++;
 
             if(roundCount >= 9){
                 endGame();
             }
+
+            player1sTurn = !player1sTurn;
+            updateTextViews();
 
         }
     }
